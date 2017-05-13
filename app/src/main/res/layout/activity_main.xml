@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/onOffSwitch" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alarm_off"
+        android:layout_marginBottom="22dp"
+        android:layout_above="@+id/onOffSwitch"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/onOffText" />
+
+    <TextView
+        android:text="@string/locationInfoIdentifying"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationStatus"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp" />
+
+    <Button
+        android:text="@string/locationButtonChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/locationStatus"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:id="@+id/locationActionButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/onOffSwitch"
+        android:layout_alignLeft="@+id/onOffSwitch"
+        android:layout_alignStart="@+id/onOffSwitch"
+        android:layout_marginTop="52dp"
+        android:id="@+id/nextAlarmSchedule" />
+
+</RelativeLayout>
