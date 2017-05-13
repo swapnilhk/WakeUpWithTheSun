@@ -21,9 +21,8 @@ public class AlarmTimeUtil {
     }
     public static AlarmTime getSunriseTime(AlarmState alarmState){
         long offset = Calendar.getInstance().getTimeZone().getOffset(new Date().getTime()) / 1000; // Offset in milliseconds with reference to GMT
-        double correction = 24*60*60 * alarmState.getLongitude()/360; // Correction for offsed in milliseconds depending upon longitude
+        double correction = 24*60*60 * alarmState.getLongitude()/360; // Correction for offset in milliseconds depending upon longitude
         double alarmTime = 12 * 60 * 60 - getDayLength(alarmState) / 2 + (offset - correction);
-
         return new AlarmTime(String.valueOf((long)(alarmTime/60/60)),
                 String.valueOf((long)((alarmTime - ((long)(alarmTime/60/60)) * 60 * 60)) / 60));
     }
