@@ -122,8 +122,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         onOffText.setText(alarmState.isAlarmOn() ? getString(R.string.alarm_on) : getString(R.string.alarm_off));
         locationStatus.setText(alarmState.getLocationName());
         locationActionButton.setText(getString(R.string.locationButtonChange));
-        nextAlarmSchedule.setText(String.valueOf(AlarmTimeUtil.getSunriseTime(
-                new ScheduleItem(alarmState.getLongitude(), alarmState.getLatitude(), new Date()))));
+        nextAlarmSchedule.setText(AlarmTimeUtil.getSunriseTime(
+                new ScheduleItem(alarmState.getLongitude(), alarmState.getLatitude(), new Date())));
     }
 
     @Override

@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.swapnilhk.wakeupwiththesun.R;
 import com.swapnilhk.wakeupwiththesun.model.AlarmState;
-import com.swapnilhk.wakeupwiththesun.model.AlarmTime;
 import com.swapnilhk.wakeupwiththesun.model.ScheduleItem;
 import com.swapnilhk.wakeupwiththesun.util.AlarmTimeUtil;
 
@@ -61,7 +60,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.mTextView.setText(new SimpleDateFormat("yyyy-MM-dd").format(scheduleDataset.get(position).getDate())
-                        +" : " + AlarmTimeUtil.getSunriseTime(scheduleDataset.get(position)).toString());
+                        +" : " + AlarmTimeUtil.getSunriseTime(scheduleDataset.get(position)));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
