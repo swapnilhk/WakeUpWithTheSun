@@ -12,4 +12,5 @@
     <string name="prefsLocationLatitude">locationLatitude</string>
     <string name="prefsLocationLongitude">locationLongitude</string>
     <string name="prefsLocationName">locationName</string>
+    <string name="buttonViewSchedule">View Schedule</string>
 </resources>

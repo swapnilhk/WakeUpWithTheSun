@@ -1,6 +1,7 @@
 package com.swapnilhk.wakeupwiththesun;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -20,10 +21,13 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.swapnilhk.wakeupwiththesun.model.AlarmState;
+import com.swapnilhk.wakeupwiththesun.model.ScheduleItem;
 import com.swapnilhk.wakeupwiththesun.util.AlarmStateUtil;
 import com.swapnilhk.wakeupwiththesun.util.AlarmTimeUtil;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,13 +35,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private AlarmState alarmState;
     private static final int MY_PERMISSION_ACCESS_COURSE_LOCATION = 0;
-    Switch onOffSwitch;
-    TextView onOffText;
-    TextView locationStatus;
-    Button locationActionButton;
-    TextView nextAlarmSchedule;
-
-    GoogleApiClient mGoogleApiClient;
+    private Switch onOffSwitch;
+    private TextView onOffText;
+    private TextView locationStatus;
+    private Button locationActionButton;
+    private TextView nextAlarmSchedule;
+    private Button viewScheduleButton;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         locationStatus = (TextView) findViewById(R.id.locationStatus);
         locationActionButton = (Button) findViewById(R.id.locationActionButton);
         nextAlarmSchedule = (TextView) findViewById(R.id.nextAlarmSchedule);
+        viewScheduleButton = (Button) findViewById(R.id.viewSchedule);
 
         // Add action listeners wherever necessary
         onOffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -70,6 +75,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onClick(View v) {
                 mGoogleApiClient.connect();
+            }
+        });
+        viewScheduleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DisplayScheduleActivity.class);
+                Bundle b = new Bundle();
+                b.putSerializable(DisplayScheduleActivity.ALARM_STATE, alarmState);
+                intent.putExtras(b);
+                startActivity(intent);
             }
         });
 
@@ -107,7 +122,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         onOffText.setText(alarmState.isAlarmOn() ? getString(R.string.alarm_on) : getString(R.string.alarm_off));
         locationStatus.setText(alarmState.getLocationName());
         locationActionButton.setText(getString(R.string.locationButtonChange));
-        nextAlarmSchedule.setText(String.valueOf(AlarmTimeUtil.getSunriseTime(alarmState)));
+        nextAlarmSchedule.setText(String.valueOf(AlarmTimeUtil.getSunriseTime(
+                new ScheduleItem(alarmState.getLongitude(), alarmState.getLatitude(), new Date()))));
     }
 
     @Override
@@ -118,9 +134,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-
+                    mGoogleApiClient.connect();
                 }
+                //
             }
         }
     }

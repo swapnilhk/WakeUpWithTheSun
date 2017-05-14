@@ -1,14 +1,18 @@
 package com.swapnilhk.wakeupwiththesun.model;
 
 import android.location.Location;
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by swapn_000 on 5/1/2017.
  */
 
-public class AlarmState {
+public class AlarmState implements Serializable{
+
     private boolean alarmOn;
     private double longitude;
     private double latitude;

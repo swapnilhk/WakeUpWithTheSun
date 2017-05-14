@@ -45,4 +45,13 @@
         android:layout_marginTop="52dp"
         android:id="@+id/nextAlarmSchedule" />
 
+    <Button
+        android:text="@string/buttonViewSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:id="@+id/viewSchedule" />
+
 </RelativeLayout>
