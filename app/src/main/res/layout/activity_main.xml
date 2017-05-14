@@ -40,9 +40,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/onOffSwitch"
-        android:layout_alignLeft="@+id/onOffSwitch"
-        android:layout_alignStart="@+id/onOffSwitch"
-        android:layout_marginTop="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="42dp"
         android:id="@+id/nextAlarmSchedule" />
 
     <Button

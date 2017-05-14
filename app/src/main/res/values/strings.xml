@@ -13,4 +13,9 @@
     <string name="prefsLocationLongitude">locationLongitude</string>
     <string name="prefsLocationName">locationName</string>
     <string name="buttonViewSchedule">View Schedule</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="explanationForLocationPerm">Sunrise and sunset times are location dependant. Hence location permission is required for the app to work. Grant Permission?</string>
+    <string name="connectionSuspended">Connection suspended!</string>
+    <string name="connectionFailed">Connection failed!</string>
 </resources>

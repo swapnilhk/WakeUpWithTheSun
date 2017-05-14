@@ -31,7 +31,8 @@ public class AlarmTimeUtil {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        long alarmTime = cal.getTime().getTime()/* Midnight */ + (long)(DAY_LENGTH - getDayLength(scheduleItem)) / 2 + (offset - correction);
-        return (new SimpleDateFormat("h:mm a").format(new Date(alarmTime)));
+        long sunriseTime = cal.getTime().getTime()/* Midnight */ + (long)(DAY_LENGTH - getDayLength(scheduleItem)) / 2 + (offset - correction);
+        long sunsetTime = cal.getTime().getTime() + DAY_LENGTH/* Midnight */ - (long)(DAY_LENGTH - getDayLength(scheduleItem)) / 2 + (offset - correction);
+        return ("Sunreise : " + new SimpleDateFormat("h:mm a").format(new Date(sunriseTime)) + " Sunset : " + new SimpleDateFormat("h:mm a").format(new Date(sunsetTime)));
     }
 }
