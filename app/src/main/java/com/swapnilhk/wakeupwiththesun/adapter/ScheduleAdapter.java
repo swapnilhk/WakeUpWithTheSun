@@ -7,8 +7,12 @@ import android.widget.TextView;
 
 import com.swapnilhk.wakeupwiththesun.R;
 import com.swapnilhk.wakeupwiththesun.model.AlarmState;
-import com.swapnilhk.wakeupwiththesun.model.ScheduleItem;
+import com.swapnilhk.wakeupwiththesun.model.Schedule;
+import com.swapnilhk.wakeupwiththesun.model.ScheduleQuery;
 import com.swapnilhk.wakeupwiththesun.util.AlarmTimeUtil;
+import com.swapnilhk.wakeupwiththesun.util.ColorUtil;
+import com.swapnilhk.wakeupwiththesun.util.Constants;
+import com.swapnilhk.wakeupwiththesun.util.FormatUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,7 +24,7 @@ import java.util.Date;
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
 
     private AlarmState alarmState;
-    private ArrayList<ScheduleItem> scheduleDataset;
+    private ArrayList<ScheduleQuery> scheduleQueryDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -36,10 +40,10 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     public ScheduleAdapter(AlarmState alarmState) {
         this.alarmState = alarmState;
-        this.scheduleDataset = new ArrayList<ScheduleItem>();
+        this.scheduleQueryDataset = new ArrayList<ScheduleQuery>();
         Date d = new Date();
         for(int position = 0; position < 366; position ++)
-            scheduleDataset.add(new ScheduleItem(alarmState.getLongitude(), alarmState.getLatitude(), new Date(d.getTime() + position * 24L * 60 * 60 * 1000)));
+            scheduleQueryDataset.add(new ScheduleQuery(alarmState.getLongitude(), alarmState.getLatitude(), new Date(d.getTime() + position * 24L * 60 * 60 * 1000)));
     }
 
     // Create new views (invoked by the layout manager)
@@ -59,13 +63,17 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.setText(new SimpleDateFormat("yyyy-MM-dd").format(scheduleDataset.get(position).getDate())
-                        +" : " + AlarmTimeUtil.getSunriseTime(scheduleDataset.get(position)));
+        Schedule schedule = AlarmTimeUtil.getSchedule(scheduleQueryDataset.get(position));
+        holder.mTextView.setText(FormatUtil.formatDate(scheduleQueryDataset.get(position).getDate())
+                        +" : Sunrise : " + FormatUtil.formatTime(new Date(schedule.getSunriseTime()))
+                        +" : Sunset : " + FormatUtil.formatTime(new Date(schedule.getSunsetTime())));
+        holder.mTextView.setBackgroundColor(ColorUtil.getColorByDayLength(schedule));
+        //holder.mTextView.setTextColor(ColorUtil.getContrastColorByDayLength(schedule));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return scheduleDataset.size();
+        return scheduleQueryDataset.size();
     }
 }

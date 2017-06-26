@@ -1,7 +1,6 @@
 package com.swapnilhk.wakeupwiththesun;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,12 +23,13 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.swapnilhk.wakeupwiththesun.model.AlarmState;
-import com.swapnilhk.wakeupwiththesun.model.ScheduleItem;
+import com.swapnilhk.wakeupwiththesun.model.Schedule;
+import com.swapnilhk.wakeupwiththesun.model.ScheduleQuery;
 import com.swapnilhk.wakeupwiththesun.util.AlarmStateUtil;
 import com.swapnilhk.wakeupwiththesun.util.AlarmTimeUtil;
+import com.swapnilhk.wakeupwiththesun.util.FormatUtil;
 
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -125,8 +125,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         onOffText.setText(alarmState.isAlarmOn() ? getString(R.string.alarm_on) : getString(R.string.alarm_off));
         locationStatus.setText(alarmState.getLocationName());
         locationActionButton.setText(getString(R.string.locationButtonChange));
-        nextAlarmSchedule.setText(AlarmTimeUtil.getSunriseTime(
-                new ScheduleItem(alarmState.getLongitude(), alarmState.getLatitude(), new Date())));
+        Schedule schedule = AlarmTimeUtil.getSchedule(
+                new ScheduleQuery(alarmState.getLongitude(), alarmState.getLatitude(), new Date()));
+        nextAlarmSchedule.setText(" : Sunrise : " + FormatUtil.formatTime(new Date(schedule.getSunriseTime()))
+                +" : Sunset : " + FormatUtil.formatTime(new Date(schedule.getSunsetTime())));
     }
 
     @Override

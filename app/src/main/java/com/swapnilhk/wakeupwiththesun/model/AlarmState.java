@@ -35,7 +35,7 @@ public class AlarmState implements Serializable{
     }
 
     public double getLatitude() {
-        return latitude;
+        return 70/*latitude*/;
     }
 
     public void setLatitude(double latitude) {

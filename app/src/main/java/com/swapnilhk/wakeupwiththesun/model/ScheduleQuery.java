@@ -7,12 +7,12 @@ import java.util.Date;
  * Created by swapn_000 on 5/14/2017.
  */
 
-public class ScheduleItem {
+public class ScheduleQuery {
     private double longitude;
     private double latitude;
     private Date date;
 
-    public ScheduleItem(double longitude, double latitude, Date date) {
+    public ScheduleQuery(double longitude, double latitude, Date date) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.date = date;
