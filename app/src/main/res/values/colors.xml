@@ -5,4 +5,5 @@
     <color name="colorAccent">#FFD740</color>
     <color name="textColorPrimary">#FF4081</color>
     <color name="windowBackground">#FFECB3</color>
+    <color name="scheduleItemText">#FFFFFF</color>
 </resources>

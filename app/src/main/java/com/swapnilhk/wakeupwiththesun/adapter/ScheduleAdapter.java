@@ -64,11 +64,20 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         Schedule schedule = AlarmTimeUtil.getSchedule(scheduleQueryDataset.get(position));
-        holder.mTextView.setText(FormatUtil.formatDate(scheduleQueryDataset.get(position).getDate())
-                        +" : Sunrise : " + FormatUtil.formatTime(new Date(schedule.getSunriseTime()))
-                        +" : Sunset : " + FormatUtil.formatTime(new Date(schedule.getSunsetTime())));
+        if(schedule.isAllDay()){
+            holder.mTextView.setText(FormatUtil.formatDate(scheduleQueryDataset.get(position).getDate())
+                    + " : All day");
+        }
+        else if (schedule.isAllNight()){
+            holder.mTextView.setText(FormatUtil.formatDate(scheduleQueryDataset.get(position).getDate())
+                    + " : All night");
+        }
+        else {
+            holder.mTextView.setText(FormatUtil.formatDate(scheduleQueryDataset.get(position).getDate())
+                    + " : Sunrise : " + FormatUtil.formatTime(new Date(schedule.getSunriseTime()))
+                    + " : Sunset : " + FormatUtil.formatTime(new Date(schedule.getSunsetTime())));
+        }
         holder.mTextView.setBackgroundColor(ColorUtil.getColorByDayLength(schedule));
-        //holder.mTextView.setTextColor(ColorUtil.getContrastColorByDayLength(schedule));
     }
 
     // Return the size of your dataset (invoked by the layout manager)

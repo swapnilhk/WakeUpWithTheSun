@@ -7,10 +7,14 @@ package com.swapnilhk.wakeupwiththesun.model;
 public class Schedule {
     private long sunriseTime;
     private long sunsetTime;
+    private boolean isAllDay;
+    private boolean isAllNight;
 
-    public Schedule(long sunriseTime, long sunsetTime) {
+    public Schedule(long sunriseTime, long sunsetTime, boolean isAllDay, boolean isAllNight) {
         this.sunriseTime = sunriseTime;
         this.sunsetTime = sunsetTime;
+        this.isAllDay = isAllDay;
+        this.isAllNight = isAllNight;
     }
 
     public long getSunsetTime() {
@@ -27,5 +31,21 @@ public class Schedule {
 
     public void setSunriseTime(long sunriseTime) {
         this.sunriseTime = sunriseTime;
+    }
+
+    public boolean isAllDay() {
+        return isAllDay;
+    }
+
+    public void setAllDay(boolean allDay) {
+        isAllDay = allDay;
+    }
+
+    public boolean isAllNight() {
+        return isAllNight;
+    }
+
+    public void setAllNight(boolean allNight) {
+        isAllNight = allNight;
     }
 }
